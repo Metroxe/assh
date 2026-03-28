@@ -4,6 +4,18 @@ Auto-reconnecting SSH with persistent tmux sessions.
 
 Open a terminal, run `assh myserver`, and forget about it. If the connection drops or the server reboots, assh waits for it to come back and reconnects to the same tmux session. Each terminal gets its own session that persists for the life of that terminal window.
 
+## Install
+
+```bash
+bash <(curl -s https://raw.githubusercontent.com/Metroxe/assh/master/install.sh)
+```
+
+Then reload your shell:
+
+```bash
+source ~/.zshrc   # or source ~/.bashrc
+```
+
 ## How it works
 
 1. Generates a unique tmux session name (`assh-<pid>`) tied to the terminal's shell PID — stable for the life of that terminal, unique across terminals
@@ -13,26 +25,6 @@ Open a terminal, run `assh myserver`, and forget about it. If the connection dro
 
 Normal SSH handles brief latency. The reconnect loop handles server reboots, network outages, and laptop sleep/wake cycles.
 
-## Install
-
-```bash
-git clone https://github.com/Metroxe/assh.git ~/Documents/projects/assh
-```
-
-Then add an alias to your shell config:
-
-**zsh** (`~/.zshrc`):
-```bash
-echo 'alias assh="~/Documents/projects/assh/assh.sh"' >> ~/.zshrc
-source ~/.zshrc
-```
-
-**bash** (`~/.bashrc` or `~/.bash_aliases`):
-```bash
-echo 'alias assh="~/Documents/projects/assh/assh.sh"' >> ~/.bash_aliases
-source ~/.bash_aliases
-```
-
 ## Usage
 
 ```bash
@@ -40,6 +32,10 @@ assh myserver          # uses ~/.ssh/config alias
 assh user@host         # direct host
 assh -p 2222 myserver  # with SSH flags
 ```
+
+## Uninstall
+
+Remove the block between `# --- assh start ---` and `# --- assh end ---` from your `~/.zshrc` or `~/.bashrc`.
 
 ## Requirements
 
